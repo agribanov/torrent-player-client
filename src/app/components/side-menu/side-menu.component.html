@@ -1,0 +1,25 @@
+<nav>
+  <md-toolbar color="primary">
+    <h3 class="md-toolbar-tools">Main Menu</h3>
+  </md-toolbar>
+  <md-nav-list>
+    <a md-list-item routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="onLinkClick($event)"> 
+      Home 
+      </a>
+    <a md-list-item routerLink="collection" routerLinkActive="active" (click)="onLinkClick($event)"> 
+      Collection 
+      </a>
+  </md-nav-list>
+  <!--<ul class="app-nav">
+    <li class="app-nav-item">
+      <a routerLink="" routerLinkActive="isSelected" [routerLinkActiveOptions]="{exact: true}" (click)="onLinkClick($event)"> 
+      Home 
+      </a>
+    </li>
+    <li class="app-nav-item">
+      <a routerLink="collection" routerLinkActive="isSelected" (click)="onLinkClick($event)"> 
+      Collection 
+      </a>
+    </li>
+  </ul>-->
+</nav>

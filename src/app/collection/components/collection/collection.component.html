@@ -1,0 +1,14 @@
+<div>
+  <md-card class="search">
+    <md-input #searchQuery (keyup)="search(searchQuery.value)">
+      <md-placeholder>
+        <i class="material-icons app-input-icon">search</i> Search
+      </md-placeholder>
+    </md-input>
+  </md-card>
+  <md-card class="flex-item collection-item" [routerLink]="['/collection', item.source, item.link]" *ngFor="let item of list | async">
+    <img md-card-image [src]="item.imageUrl">
+    <md-card-title>{{item.title}}</md-card-title>
+    <md-card-subtitle>{{item.year}} {{item.genre}}</md-card-subtitle>
+  </md-card>
+</div>
