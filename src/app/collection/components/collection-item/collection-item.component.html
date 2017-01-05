@@ -1,39 +1,65 @@
-<md-toolbar color="warn" *ngIf="error">
-    ERROR: {{error}}. <a routerLink="/collection">Back to collection</a>
-</md-toolbar>
+<div class="alert alert-danger" role="alert" *ngIf="error">
+    <strong>ERROR:</strong> {{error}}.
+    <a class="alert-link" routerLink="/collection/category/films">Back to collection</a>
+</div>
 
-<md-card *ngIf="model">
-    <img [src]="model.imageUrl">
-    <md-card-title-group>
-        <md-card-title>{{model.title}}</md-card-title>
-        <md-card-subtitle>
-            {{model.year}} {{model.genre}}
-        </md-card-subtitle>
-    </md-card-title-group>
-    <md-card-content>
-        {{model.description}}
-    </md-card-content>
-    <md-card-content *ngIf="playbackUrl" class="video-container">
-        <video appVideoJsPlayer preload="auto" controls autoplay 
-        [src]="playbackUrl" data-setup='{"fluid": true}'></video>
-    </md-card-content>
-    <md-list>
-        <h3 md-subheader>Folders</h3>
-        <div *ngFor="let folder of model.folders">
-            <md-list-item class="folder"
-                (click)="folder.expanded = !folder.expanded">
-                <md-icon md-list-avatar>folder</md-icon>
-                <h4 md-line>{{folder.title}}</h4>
-                <p md-line class="files-count"> {{folder.files.length}} files</p>
-            </md-list-item>
-            <md-list-item *ngIf="folder.expanded" class="files-list">
-                <a md-line></a>
-                <h6 md-line *ngFor="let file of folder.files" class="file" 
-                    [class.blocked] = "!file.m3u8"
-                    (click)="playFile(file.id)">
-                    <md-icon md-list-avatar>note</md-icon> {{file.title}}
-                </h6>
-            </md-list-item>
+<div *ngIf="model">
+    <div class="row margin-top-30">
+        <div class="col-xs-12 col-md-4">
+            <img [src]="model.imageUrl" [alt]="model.title" class="mx-auto d-block poster">
         </div>
-    </md-list>
-</md-card>
+        <div class="col-xs-12 col-md-8">
+            <h1>{{model.title}}</h1>
+            <dl class="row margin-top-30">
+                <dt class="col-sm-3">Жанр:</dt>
+                <dd class="col-sm-9">{{model.genre}}</dd>
+
+                <dt class="col-sm-3">Страна:</dt>
+                <dd class="col-sm-9">{{model.country}}</dd>
+
+                <dt class="col-sm-3">Длительность:</dt>
+                <dd class="col-sm-9">{{model.length}}</dd>
+
+                <dt class="col-sm-3">Качество:</dt>
+                <dd class="col-sm-9">{{model.quality}}</dd>
+            </dl>
+            <div class="row margin-top-30">
+                <div class="col-xs-12">
+                    <h3>Описание:</h3>
+                    <p class="lead">{{model.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row margin-top-30" *ngIf="playbackUrl">
+        <div class="col-xs-10 offset-xs-1">
+            <video appVideoJsPlayer preload="auto" controls autoplay [src]="playbackUrl" data-setup='{"fluid": true}'></video>
+        </div>
+    </div>
+
+    <div class="row margin-top-30">
+        <div class="col-xs-12">
+            <ngb-tabset>
+                <ngb-tab [title]="folder.title" *ngFor="let folder of model.folders | async">
+                    <template ngbTabContent>
+                        <ngb-accordion>
+                            <ngb-panel *ngFor="let subfolder of folder.subfolders | async">
+                                <template ngbPanelTitle>
+                                    {{subfolder.title}}
+                                    <!--<span class="tag tag-default tag-pill float-xs-right">{{subfolder.files.length}} видео</span>-->
+                                </template>
+                                <template ngbPanelContent>
+                                    <ul class="list-group">
+                                        <li class="list-group-item file" *ngFor="let file of subfolder.files | async" (click)="playFile(folder, subfolder, file)">
+                                            {{file.title}}
+                                        </li>
+                                    </ul>
+                                </template>
+                            </ngb-panel>
+                        </ngb-accordion>
+                    </template>
+                </ngb-tab>
+            </ngb-tabset>
+        </div>
+    </div>
+</div>

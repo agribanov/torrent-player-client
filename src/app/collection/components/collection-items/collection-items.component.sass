@@ -1,0 +1,38 @@
+.card
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    min-height: 60px;
+
+    .card-block
+        position: absolute;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        width: 100%;
+
+    .card-text
+        display: none;
+
+    .card-title
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin-bottom: 0;
+
+    .card-img-top
+        width: 100%;
+    
+    &:hover
+        border-color: #66afe9;
+
+        // img
+        //     opacity: 0.5;
+            
+        .card-block
+            background-color: white;
+
+        .card-title
+            white-space: normal;
+
+        .card-text
+            display: block;

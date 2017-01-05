@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '@angular/material';
-// import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CollectionService } from './services/collection.service';
 import { CollectionComponent } from './components/collection/collection.component';
@@ -10,14 +9,16 @@ import { CollectionItemComponent } from './components/collection-item/collection
 import { VideoJsPlayerDirective } from '../directives/video-js-player.directive';
 
 import collectionRoutes from './collection.routes';
+import { CollectionItemsComponent } from './components/collection-items/collection-items.component';
+import { CollectionSearchComponent } from './components/collection-search/collection-search.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    MaterialModule.forRoot(),
+    NgbModule,
     collectionRoutes
   ],
   providers: [CollectionService],
-  declarations: [CollectionComponent, CollectionItemComponent, VideoJsPlayerDirective],
+  declarations: [CollectionComponent, CollectionItemComponent, VideoJsPlayerDirective, CollectionItemsComponent, CollectionSearchComponent],
 })
 export class CollectionModule { }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CollectionService } from '../../services/collection.service';
-import { CollectionItem } from '../../services/collection-item.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
+import { CollectionService } from '../../services/collection.service';
+import { CollectionItem } from '../../services/collection-item.model';
 
 @Component({
   selector: 'app-collection',
@@ -12,18 +13,32 @@ import { Observable } from 'rxjs/Observable';
 })
 export class CollectionComponent implements OnInit {
   list: Observable<CollectionItem[]>;
+  category: string;
 
-  constructor(private collectionService: CollectionService) { }
+  private page: number;
+
+  constructor(private collectionService: CollectionService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.getList();
+    this.route.params.subscribe(params => {
+      this.category = params['category'];
+      this.page = 1;
+      this.getList();
+    });
   }
 
   getList() {
-    this.list = this.collectionService.getList();
+    this.list = this.collectionService.getList(this.category, this.page);
   }
 
-  search(query) {
-    this.list = query ? this.collectionService.search(query) : this.collectionService.getList();
+  openPage(page) {
+    console.log('open page', page);
+    if (page > 0) {
+      this.page = page;
+    }
+
+    this.getList();
   }
 }

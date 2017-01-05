@@ -2,28 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import 'hammerjs';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-import appRoutes from './app.routes';
-import { MaterialModule } from '@angular/material';
+import { AppCommonModule } from './app-common/app-common.module';
 
 import { AppComponent } from './components/app/app.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
-
 import { UtilsService } from './services/utils.service';
-import { VideoJsPlayerDirective } from './directives/video-js-player.directive';
+
+import appRoutes from './app.routes';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SideMenuComponent
-    // VideoJsPlayerDirective
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
+    NgbModule.forRoot(),
+    AppCommonModule,
     appRoutes
   ],
   providers: [UtilsService],

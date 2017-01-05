@@ -1,0 +1,4 @@
+<form class="form-inline">
+  <input #searchInput type="text" class="form-control" placeholder="Search">
+  <a class="clear-icon" [hidden] = "!searchInput.value" (click)="clearSearch()">clear</a>
+</form>

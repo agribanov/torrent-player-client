@@ -18,9 +18,9 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.sass",
-        "./assets/custom-theme.sass",
-        "../node_modules/video.js/dist/video-js.min.css"
+        "../node_modules/video.js/dist/video-js.min.css",
+        "styles.css",
+        "assets/custom-theme.sass"
       ],
       "scripts": [
         "../node_modules/video.js/dist/video.min.js",
@@ -46,7 +46,7 @@
     }
   },
   "defaults": {
-    "styleExt": "sass",
+    "styleExt": "css",
     "prefixInterfaces": false,
     "inline": {
       "style": false,

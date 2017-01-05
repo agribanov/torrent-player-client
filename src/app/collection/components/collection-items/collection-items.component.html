@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="card col-xs-12 col-md-2" *ngFor="let item of items" [routerLink]="['/collection/item', item.source,  item.link]">
+    <img class="card-img-top" [src]="item.imageUrl" [alt]="item.title">
+    <div class="card-block">
+      <h6 class="card-title">{{item.title}}</h6>
+      <p class="card-text">
+        <small class="text-muted">{{item.year}}</small>
+        <small class="text-muted pull-right">{{item.country || item.genre}}</small>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <button type="button" class="btn btn-primary btn-lg btn-block" 
+      (click)="prev()" [disabled]="page == 1"><< Назад</button>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <button type="button" class="btn btn-primary btn-lg btn-block"
+      (click)="next()">Вперед >></button>
+  </div>
+</div>

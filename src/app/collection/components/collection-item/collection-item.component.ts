@@ -37,8 +37,8 @@ export class CollectionItemComponent implements OnInit {
       );
   }
 
-  playFile(fileId) {
-    this.collectionService.getFileUrl(this.source, fileId)
+  playFile(folder, subfolder, file) {
+    this.collectionService.getFileUrl(this.source, this.model.id, folder.id, subfolder.id, file.id)
       .subscribe(
       url => this.playbackUrl = url
       );

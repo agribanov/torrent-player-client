@@ -5,7 +5,7 @@ declare const videojs: any;
 @Directive({
   selector: '[appVideoJsPlayer]'
 })
-export class VideoJsPlayerDirective implements OnDestroy{
+export class VideoJsPlayerDirective implements OnDestroy {
   @Input() set src(url: string) {
     this.setPlaybackUrl(url);
   }
@@ -21,7 +21,7 @@ export class VideoJsPlayerDirective implements OnDestroy{
   }
 
   ngOnDestroy() {
-      this.player.dispose()
+    this.player.dispose();
   }
 
   setPlaybackUrl(src: string) {

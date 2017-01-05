@@ -1,23 +1,2 @@
 @import 'common'
-@import '~@angular/material/core/theming/all-theme';
-@include md-core();
-$primary: md-palette($md-light-blue);
-$accent:  md-palette($md-amber, A200, A100, A400);
-$theme: md-light-theme($primary, $accent);
-@include angular-material-theme($theme);
-
-// md-sidenav
-//     a[md-list-item].active > .md-list-item
-//         background: md-color($background, 'hover');
-
-//     [md-button] 
-//         width: 100%;
-//         position: relative;
-//         bottom: 0;
-//         margin: 24px 0;
-// .m2app-dark
-//   $dark-primary: md-palette($md-pink, 700, 500, 900);
-//   $dark-accent:  md-palette($md-blue-grey, A200, A100, A400);
-//   $dark-warn:    md-palette($md-deep-orange);
-//   $dark-theme: md-dark-theme($dark-primary, $dark-accent, $dark-warn);
-//   @include angular-material-theme($dark-theme);
+@import '~bootstrap/scss/bootstrap.scss'
