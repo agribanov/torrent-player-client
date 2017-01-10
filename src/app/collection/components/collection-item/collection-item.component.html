@@ -1,65 +1,65 @@
 <div class="alert alert-danger" role="alert" *ngIf="error">
-    <strong>ERROR:</strong> {{error}}.
-    <a class="alert-link" routerLink="/collection/category/films">Back to collection</a>
+  <strong>ERROR:</strong> {{error}}.
+  <a class="alert-link" routerLink="/collection/category/films">Back to collection</a>
 </div>
-
 <div *ngIf="model">
-    <div class="row margin-top-30">
-        <div class="col-xs-12 col-md-4">
-            <img [src]="model.imageUrl" [alt]="model.title" class="mx-auto d-block poster">
-        </div>
-        <div class="col-xs-12 col-md-8">
-            <h1>{{model.title}}</h1>
-            <dl class="row margin-top-30">
-                <dt class="col-sm-3">Жанр:</dt>
-                <dd class="col-sm-9">{{model.genre}}</dd>
-
-                <dt class="col-sm-3">Страна:</dt>
-                <dd class="col-sm-9">{{model.country}}</dd>
-
-                <dt class="col-sm-3">Длительность:</dt>
-                <dd class="col-sm-9">{{model.length}}</dd>
-
-                <dt class="col-sm-3">Качество:</dt>
-                <dd class="col-sm-9">{{model.quality}}</dd>
-            </dl>
-            <div class="row margin-top-30">
-                <div class="col-xs-12">
-                    <h3>Описание:</h3>
-                    <p class="lead">{{model.description}}</p>
-                </div>
-            </div>
-        </div>
+  <div class="row margin-top-30">
+    <div class="col-xs-12 col-md-4">
+      <img [src]="model.imageUrl" [alt]="model.title" class="mx-auto d-block poster">
     </div>
-    <div class="row margin-top-30" *ngIf="playbackUrl">
-        <div class="col-xs-10 offset-xs-1">
-            <video appVideoJsPlayer preload="auto" controls autoplay [src]="playbackUrl" data-setup='{"fluid": true}'></video>
-        </div>
-    </div>
-
-    <div class="row margin-top-30">
+    <div class="col-xs-12 col-md-8">
+      <h1>{{model.title}}</h1>
+      <dl class="row margin-top-30">
+        <dt class="col-sm-3">Жанр:</dt>
+        <dd class="col-sm-9">{{model.genre}}</dd>
+        <dt class="col-sm-3">Страна:</dt>
+        <dd class="col-sm-9">{{model.country}}</dd>
+        <dt class="col-sm-3">Длительность:</dt>
+        <dd class="col-sm-9">{{model.length}}</dd>
+        <dt class="col-sm-3">Качество:</dt>
+        <dd class="col-sm-9">{{model.quality}}</dd>
+      </dl>
+      <div class="row margin-top-30">
         <div class="col-xs-12">
-            <ngb-tabset>
-                <ngb-tab [title]="folder.title" *ngFor="let folder of model.folders | async">
-                    <template ngbTabContent>
-                        <ngb-accordion>
-                            <ngb-panel *ngFor="let subfolder of folder.subfolders | async">
-                                <template ngbPanelTitle>
-                                    {{subfolder.title}}
-                                    <!--<span class="tag tag-default tag-pill float-xs-right">{{subfolder.files.length}} видео</span>-->
-                                </template>
-                                <template ngbPanelContent>
-                                    <ul class="list-group">
-                                        <li class="list-group-item file" *ngFor="let file of subfolder.files | async" (click)="playFile(folder, subfolder, file)">
-                                            {{file.title}}
-                                        </li>
-                                    </ul>
-                                </template>
-                            </ngb-panel>
-                        </ngb-accordion>
-                    </template>
-                </ngb-tab>
-            </ngb-tabset>
+          <h3>Описание:</h3>
+          <p class="lead">{{model.description}}</p>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="row margin-top-30" *ngIf="playbackUrl">
+    <div class="col-xs-10 offset-xs-1">
+      <video appVideoJsPlayer preload="auto" controls autoplay [src]="playbackUrl" data-setup='{"fluid": true}'></video>
+    </div>
+  </div>
+  <div class="row margin-top-30">
+    <div class="col-xs-12">
+      <ngb-tabset>
+        <ngb-tab [title]="folder.title" *ngFor="let folder of model.folders | async">
+          <template ngbTabContent>
+            <ngb-accordion>
+              <ngb-panel *ngFor="let subfolder of folder.subfolders | async">
+                <template ngbPanelTitle>
+                  {{subfolder.title}}
+                  <!--<span class="tag tag-default tag-pill float-xs-right">{{subfolder.files.length}} видео</span>-->
+                </template>
+                <template ngbPanelContent>
+                  <ul class="list-group">
+                    <li class="list-group-item file" *ngFor="let file of subfolder.files | async" (click)="playFile(folder, subfolder, file)">
+                      {{file.title}}
+                    </li>
+                  </ul>
+                </template>
+              </ngb-panel>
+            </ngb-accordion>
+            <ul class="list-group">
+              <li class="list-group-item file" *ngFor="let file of folder.files" (click)="playFile(folder, folder, file)">
+                {{file.title}}
+              </li>
+            </ul>
+          </template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
 </div>

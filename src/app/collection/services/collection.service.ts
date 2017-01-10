@@ -43,8 +43,8 @@ export class CollectionService {
       });
   }
 
-  getFolders(source: string, id: string, foldersKey: string) {
-    const url = this.utils.interpolate(apiUrls.collectionFoldersUrl, { source, id, foldersKey });
+  getFolders(source: string, id: string) {
+    const url = this.utils.interpolate(apiUrls.collectionFoldersUrl, { source, id});
 
     return this.http.get(url)
       .map((r: Response) => r.json() as Array<Object>);
@@ -79,7 +79,7 @@ export class CollectionService {
     if (model.folders) {
       observable = Observable.of(model.folders);
     } else {
-      observable = this.getFolders(model.source, model.id, model.foldersKey);
+      observable = this.getFolders(model.source, model.id);
     }
 
     model.folders = observable.map((folders: Array<Object>) => {
